@@ -64,7 +64,7 @@ const NewTask = () => {
       };
 
       await axios.post(
-        'http://localhost:5001/api/tasks',
+        `${import.meta.env.VITE_API_URL}/api/tasks`,
         newTask,
         {
           headers: {
