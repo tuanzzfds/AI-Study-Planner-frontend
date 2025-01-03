@@ -10,6 +10,7 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -19,7 +20,7 @@ const UserProfile = () => {
           throw new Error('No authentication token found. Please log in.');
         }
 
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/profile`, {
+        const response = await axios.get(`${baseUrl}/api/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);

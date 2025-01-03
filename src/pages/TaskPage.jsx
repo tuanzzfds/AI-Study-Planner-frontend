@@ -39,10 +39,12 @@ const TasksPage = () => {
     fetchTasks();
   }, [search, filterPriority, filterStatus, sortField, sortOrder]);
 
+  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
+
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`, {
+      const response = await axios.get(`${baseUrl}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
         params: {
           search,
@@ -83,7 +85,7 @@ const TasksPage = () => {
   const handleDeleteTask = async (taskId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${taskId}`, {
+      await axios.delete(`${baseUrl}/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(tasks.filter(task => task._id !== taskId));
@@ -107,7 +109,7 @@ const TasksPage = () => {
     try {
       const token = localStorage.getItem('token');
       const updatedTask = { ...selectedTask, status: 'Completed' };
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${selectedTask._id}`, updatedTask, {
+      await axios.put(`${baseUrl}/api/tasks/${selectedTask._id}`, updatedTask, {
         headers: { Authorization: `Bearer ${token}` },
       });
       handleUpdateTask(updatedTask);

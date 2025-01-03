@@ -71,9 +71,11 @@ const AnalyticsPage = () => {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
+
   useEffect(() => {
     // Fetch daily time spent data
-    axios.get('${import.meta.env.VITE_API_URL}/api/daily-time')
+    axios.get(`${baseUrl}/api/daily-time`)
       .then(response => {
         console.log('Daily time data:', response.data); // Log data to check if it's correct
         setDailyData(response.data);
@@ -81,7 +83,7 @@ const AnalyticsPage = () => {
       .catch(error => {
         console.error('Error fetching daily time data:', error);
       });
-    axios.get('${import.meta.env.VITE_API_URL}/api/task-status')
+    axios.get(`${baseUrl}/api/task-status`)
       .then(response => {
         const { todo, inProgress, completed, expired, notStarted } = response.data;
         setTaskStatusData({
@@ -102,7 +104,7 @@ const AnalyticsPage = () => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     // Fetch daily time spent data for the selected date
-    axios.get(`${import.meta.env.VITE_API_URL}/api/daily-time?date=${date.toISOString()}`)
+    axios.get(`${baseUrl}/api/daily-time?date=${date.toISOString()}`)
       .then(response => {
         console.log('Daily time data for selected date:', response.data); // Log data to check if it's correct
         setDailyData(response.data);
