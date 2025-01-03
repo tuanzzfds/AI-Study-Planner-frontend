@@ -64,7 +64,7 @@ const NewTask = () => {
       };
 
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/tasks`,
+        `${import.meta.env.VITE_API_URL}api/tasks`,  // Removed the extra forward slash
         newTask,
         {
           headers: {
