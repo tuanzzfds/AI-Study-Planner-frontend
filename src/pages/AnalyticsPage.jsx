@@ -121,7 +121,12 @@ const AnalyticsPage = () => {
   const handleGetAIFeedback = async () => {
     try {
       setIsAnalyzing(true);
-      const result = await analyzeAnalytics(dailyData, taskStatusData, progressPercentage);
+      const response = await axios.post(`${baseUrl}/api/analytics`, {
+        dailyData,
+        taskStatusData,
+        progressPercentage,
+      });
+      const result = response.data;
       setFeedbackResult(result);
       setShowFeedbackModal(true);
     } catch (error) {
