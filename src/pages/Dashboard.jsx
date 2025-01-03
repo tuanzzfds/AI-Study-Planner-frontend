@@ -1,10 +1,10 @@
 import './Dashboard.css'; // local CSS
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
-import { FaPlus } from 'react-icons/fa';
-import AIAgentControls from '../components/AIAgentControls';
+// import AIAgentControls from '../components/AIAgentControls'; // Removed import
 import TaskList from '../components/TaskList'; // Import TaskList component
 import { Button } from 'react-bootstrap';
+import { FaPlus } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -139,7 +139,7 @@ const Dashboard = () => {
           <div className="top-header-left">
             <div className="time-info">{timeStr}</div>
             <div className="date-info">{dateStr}</div>
-            <AIAgentControls />
+            {/* <AIAgentControls /> */} {/* Removed AIAgentControls component */}
           </div>
         </div>
 
