@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5001/api',
+  baseURL: import.meta.env.VITE_API_URL, // Updated to use VITE_API_URL
 });
 
 // Add a request interceptor to include the token

@@ -52,7 +52,7 @@ const AddTaskForm = ({ onTaskAdded }) => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5001/api/tasks', {
+      await axios.post(`${import.meta.env.REACT_APP_API_URL}/api/tasks`, { // Updated URL
         title,
         description,
         priority,

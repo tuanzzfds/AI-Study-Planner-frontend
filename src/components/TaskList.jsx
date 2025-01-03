@@ -13,7 +13,7 @@ const TaskList = ({ tasks, onTaskUpdated, onTaskDeleted }) => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5001/api/tasks/${id}`, {
+      await axios.delete(`${import.meta.env.REACT_APP_API_URL}/api/tasks/${id}`, { // Updated URL
         headers: { Authorization: `Bearer ${token}` },
       });
       onTaskDeleted();

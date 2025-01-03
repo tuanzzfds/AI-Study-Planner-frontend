@@ -56,7 +56,7 @@ const SettingsPage = () => {
       if (profilePicture) formData.append('profilePicture', profilePicture);
 
       await axios.put(
-        'http://localhost:5001/api/users/profile',
+        `${import.meta.env.REACT_APP_API_URL}/api/users/profile`, // Updated URL
         formData,
         {
           headers: {
