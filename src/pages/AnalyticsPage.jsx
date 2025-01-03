@@ -14,7 +14,6 @@ import {
   BarElement,
 } from 'chart.js';
 import Sidebar from '../components/Sidebar'; // Import Sidebar component
-import { analyzeAnalytics } from '../services/geminiServiceAnalyticPage';
 
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
@@ -71,7 +70,7 @@ const AnalyticsPage = () => {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
+  const baseUrl = 'https://ai-study-planner-backend-production.up.railway.app'; // Update base URL
 
   useEffect(() => {
     // Fetch daily time spent data
