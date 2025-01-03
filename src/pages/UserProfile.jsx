@@ -19,7 +19,7 @@ const UserProfile = () => {
           throw new Error('No authentication token found. Please log in.');
         }
 
-        const response = await axios.get('http://localhost:5001/api/users/profile', {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -72,7 +72,7 @@ const UserProfile = () => {
                   <Col md={4} className="text-center">
                     {user.profilePicture ? (
                       <Image
-                        src={`http://localhost:5001${user.profilePicture}`}
+                        src={`${import.meta.env.VITE_API_URL}${user.profilePicture}`}
                         roundedCircle
                         fluid
                         className="profile-image mb-3"

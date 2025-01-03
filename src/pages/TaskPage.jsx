@@ -42,7 +42,7 @@ const TasksPage = () => {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5001/api/tasks', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
         params: {
           search,
@@ -83,7 +83,7 @@ const TasksPage = () => {
   const handleDeleteTask = async (taskId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5001/api/tasks/${taskId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(tasks.filter(task => task._id !== taskId));
@@ -107,7 +107,7 @@ const TasksPage = () => {
     try {
       const token = localStorage.getItem('token');
       const updatedTask = { ...selectedTask, status: 'Completed' };
-      await axios.put(`http://localhost:5001/api/tasks/${selectedTask._id}`, updatedTask, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${selectedTask._id}`, updatedTask, {
         headers: { Authorization: `Bearer ${token}` },
       });
       handleUpdateTask(updatedTask);
