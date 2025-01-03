@@ -3,6 +3,8 @@ import { Button, Table, Form } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
 
+const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
+
 const TaskList = ({ tasks, onTaskUpdated, onTaskDeleted }) => {
   const [search, setSearch] = useState('');
   const [filterPriority, setFilterPriority] = useState('');
@@ -13,7 +15,7 @@ const TaskList = ({ tasks, onTaskUpdated, onTaskDeleted }) => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`, { // Updated URL
+      await axios.delete(`${baseUrl}/api/tasks/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       onTaskDeleted();

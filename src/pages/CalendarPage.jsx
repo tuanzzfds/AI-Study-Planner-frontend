@@ -168,11 +168,13 @@ const CalendarPage = () => {
     setIsTimerRunning(true);
   };
 
+  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
+
   // Fetch tasks from backend and set events
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks`, {
+      const response = await axios.get(`${baseUrl}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const fetchedEvents = Array.isArray(response.data.tasks)
@@ -213,7 +215,7 @@ const CalendarPage = () => {
         );
 
         const token = localStorage.getItem('token');
-        await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${event.id}`, {
+        await axios.put(`${baseUrl}/api/tasks/${event.id}`, {
           startDate: updatedEvent.start.toISOString(),
           endDate: updatedEvent.end.toISOString(),
           status: 'Completed', // Maintain completed status
@@ -250,7 +252,7 @@ const CalendarPage = () => {
       );
 
       const token = localStorage.getItem('token');
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${event.id}`, {
+      await axios.put(`${baseUrl}/api/tasks/${event.id}`, {
         startDate: updatedEvent.start.toISOString(),
         endDate: updatedEvent.end.toISOString(),
         status: updatedEvent.status,
@@ -272,7 +274,7 @@ const CalendarPage = () => {
     }
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`${import.meta.env.VITE_API_URL}/api/tasks/${selectedEvent.id}/status`, {
+      await axios.patch(`${baseUrl}/api/tasks/${selectedEvent.id}/status`, {
         status: 'Completed'
       }, {
         headers: {

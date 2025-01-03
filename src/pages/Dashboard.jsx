@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [tasksDueToday, setTasksDueToday] = useState(0);
   const [upcomingTasks, setUpcomingTasks] = useState([]); // New state for upcoming tasks
   const [inProgressTasks, setInProgressTasks] = useState([]); // New state for in-progress tasks
+  const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, '');
   // Function to update date and time every second
   const timer = setInterval(() => {
     const now = new Date();
@@ -42,7 +43,7 @@ const Dashboard = () => {
     const fetchTasksDueToday = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/tasks/due-today`, {
+        const response = await axios.get(`${baseUrl}/api/tasks/due-today`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTasksDueToday(response.data.count);
@@ -54,7 +55,7 @@ const Dashboard = () => {
     const fetchInProgressTasks = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/tasks`, {
+        const response = await axios.get(`${baseUrl}/api/tasks`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { status: 'In Progress' },
         });
@@ -66,7 +67,7 @@ const Dashboard = () => {
     const fetchUpcomingTasks = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/tasks/upcoming`, {
+        const response = await axios.get(`${baseUrl}/api/tasks/upcoming`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUpcomingTasks(response.data.tasks);
@@ -92,7 +93,7 @@ const Dashboard = () => {
     const fetchInProgressTasks = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}api/tasks`, {
+        const response = await axios.get(`${baseUrl}/api/tasks`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { status: 'In Progress' },
         });
@@ -108,13 +109,13 @@ const Dashboard = () => {
   const handleTaskDeleted = async (taskId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_URL}api/tasks/${taskId}`, {
+      await axios.delete(`${baseUrl}/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const fetchInProgressTasks = async () => {
         try {
           const token = localStorage.getItem('token');
-          const response = await axios.get(`${import.meta.env.VITE_API_URL}api/tasks`, {
+          const response = await axios.get(`${baseUrl}/api/tasks`, {
             headers: { Authorization: `Bearer ${token}` },
             params: { status: 'In Progress' },
           });
