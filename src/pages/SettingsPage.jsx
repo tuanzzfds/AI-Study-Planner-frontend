@@ -91,6 +91,10 @@ const SettingsPage = () => {
                     <Image
                       src="https://via.placeholder.com/50"
                       alt="Profile"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = 'https://fallback-image.com/fallback.png';
+                      }}
                       roundedCircle
                       className="me-3"
                     />
