@@ -47,6 +47,11 @@ const NewTask = () => {
       return;
     }
 
+    if (startDate >= endDate) {
+      setError('End time must be after start time');
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {

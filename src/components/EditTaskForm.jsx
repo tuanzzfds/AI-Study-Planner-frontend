@@ -43,6 +43,11 @@ const EditTaskForm = ({ task, onTaskEdit }) => {
       return;
     }
 
+    if (startDate >= endDate) {
+      setErrors({ dateRange: 'End time must be after start time' });
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       await axios.put(`http://localhost:5001/api/tasks/${task._id}`, {
