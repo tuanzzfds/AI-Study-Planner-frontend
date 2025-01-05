@@ -54,7 +54,7 @@ const SettingsPage = () => {
       if (password) formData.append('password', password);
 
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/users/profile`,
+        `${import.meta.env.VITE_API_URL}/api/users/profile`.replace(/([^:]\/)\/+/g, "$1"),
         formData,
         {
           headers: {
