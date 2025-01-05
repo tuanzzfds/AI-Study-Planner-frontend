@@ -136,12 +136,12 @@ const CalendarPage = () => {
     if ("Notification" in window && Notification.permission === "granted") {
       new Notification(isBreak ? "Break Time Finished!" : "Focus Session Complete!", {
         body: isBreak ? "Ready to get back to work?" : "Great job! Time for a break!",
-        icon: "/favicon.ico" // You can add your own icon path
+        icon: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" // Updated icon to Font Awesome
       });
     }
 
     // Play a sound notification
-    const audio = new Audio('/notification-sound.mp3'); // Add your sound file to public folder
+    const audio = new Audio('/new-notification-sound.mp3'); // Updated notification sound
     audio.play().catch(e => console.log('Audio play failed:', e));
 
     setIsTimerRunning(false);
