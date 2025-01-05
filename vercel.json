@@ -1,5 +1,16 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Set-Cookie",
+          "value": "cookieName=cookieValue; Path=/; HttpOnly; Secure; SameSite=Strict"
+        }
+      ]
+    }
   ]
 }
