@@ -120,7 +120,7 @@ const AnalyticsPage = () => {
   useEffect(() => {
     const fetchTotalTimeSpent = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/user/totaltime`);
+        const response = await axios.get(`${baseUrl}/api/user/total-time`); // Updated endpoint
         setTotalTimeSpent(response.data.totalTimeSpent);
       } catch (error) {
         console.error('Error fetching total time spent:', error);
