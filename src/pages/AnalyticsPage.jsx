@@ -21,7 +21,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarEle
 const AnalyticsPage = () => {
   // Mock data for total time
   const totalEstimatedTime = 1000; // in minutes
-  const totalTimeSpent = 750; // in minutes
+  const [totalTimeSpent, setTotalTimeSpent] = useState(0);
   const progressPercentage = Math.round((totalTimeSpent / totalEstimatedTime) * 100);
 
   // Mock data for daily time spent
