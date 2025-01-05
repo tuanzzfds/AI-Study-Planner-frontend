@@ -8,7 +8,6 @@ const SettingsPage = () => {
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [newsletters, setNewsletters] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
@@ -53,10 +52,9 @@ const SettingsPage = () => {
       const formData = new FormData();
       if (fullName) formData.append('fullName', fullName);
       if (password) formData.append('password', password);
-      if (profilePicture) formData.append('profilePicture', profilePicture);
 
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/users/profile`, // Updated URL
+        `${import.meta.env.VITE_API_URL}/api/users/profile`,
         formData,
         {
           headers: {
@@ -85,26 +83,6 @@ const SettingsPage = () => {
           <Form onSubmit={handleSave}>
             <Row>
               <Col xs={12} md={8}>
-                <Form.Group as={Row} className="mb-3" controlId="profilePicture">
-                  <Form.Label column sm="3">Profile Picture</Form.Label>
-                  <Col sm="9" className="d-flex align-items-center">
-                    <Image
-                      src="https://via.placeholder.com/50"
-                      alt="Profile"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = 'https://fallback-image.com/fallback.png';
-                      }}
-                      roundedCircle
-                      className="me-3"
-                    />
-                    <Form.Control
-                      type="file"
-                      onChange={(e) => setProfilePicture(e.target.files[0])}
-                    />
-                  </Col>
-                </Form.Group>
-
                 <Form.Group as={Row} className="mb-3" controlId="fullName">
                   <Form.Label column sm="3">Full Name</Form.Label>
                   <Col sm="9">
