@@ -36,8 +36,6 @@ const CalendarPage = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [remainingTime, setRemainingTime] = useState(timerDuration * 60);
   const [isBreak, setIsBreak] = useState(false);
-  const [showEndTimerModal, setShowEndTimerModal] = useState(false);
-  const [selectedEndTime, setSelectedEndTime] = useState('');
 
   const overlayStyle = {
     position: 'fixed',
@@ -293,16 +291,6 @@ const CalendarPage = () => {
     }
   };
 
-  const confirmEndTimerEarly = () => {
-    // Implement the logic to end the timer early
-    handleEndTimerEarly();
-    setShowEndTimerModal(false);
-  };
-
-  const cancelEndTimerEarly = () => {
-    setShowEndTimerModal(false);
-  };
-
   return (
     <>
       <Sidebar />
@@ -387,7 +375,7 @@ const CalendarPage = () => {
                   </div>
                   <p>Time Remaining: {Math.floor(remainingTime / 60)}:{('0' + (remainingTime % 60)).slice(-2)}</p>
                   {!isBreak ? (
-                    <Button variant="danger" onClick={() => setShowEndTimerModal(true)}>End Timer Early</Button>
+                    <Button variant="danger" onClick={handleEndTimerEarly}>End Timer</Button>
                   ) : (
                     <>
                       <Button variant="primary" onClick={handleRestartTimer}>Restart Focus Timer</Button>
@@ -396,16 +384,6 @@ const CalendarPage = () => {
                   )}
                 </>
               )}
-              <h5>Select End Time</h5>
-              <select
-                value={selectedEndTime}
-                onChange={(e) => setSelectedEndTime(e.target.value)}
-              >
-                <option value="5">5 minutes</option>
-                <option value="10">10 minutes</option>
-                <option value="15">15 minutes</option>
-                <option value="20">20 minutes</option>
-              </select>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModal}>
@@ -425,7 +403,7 @@ const CalendarPage = () => {
           <div>
             <Button
               variant="danger"
-              onClick={() => setShowEndTimerModal(true)}
+              onClick={handleEndTimerEarly}
               style={{ marginRight: '10px' }}
             >
               End Timer Early
@@ -438,21 +416,6 @@ const CalendarPage = () => {
           </p>
         </div>
       )}
-      {/* Add the confirmation modal */}
-      <Modal show={showEndTimerModal} onHide={cancelEndTimerEarly} style={{ zIndex: 10000 }}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm End Timer</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to end the timer early?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={cancelEndTimerEarly}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={confirmEndTimerEarly}>
-            End Timer
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </>
   );
 };
