@@ -100,6 +100,35 @@ const AnalyticsPage = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const fetchDailyData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${baseUrl}/api/user/dailytimespent`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setDailyData(response.data);
+      } catch (error) {
+        console.error('Error fetching daily data:', error);
+      }
+    };
+    fetchDailyData();
+  }, []);
+
+  useEffect(() => {
+    const fetchTotalTimeSpent = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/user/totaltime`);
+        setTotalTimeSpent(response.data.totalTimeSpent);
+      } catch (error) {
+        console.error('Error fetching total time spent:', error);
+      }
+    };
+    fetchTotalTimeSpent();
+  }, [totalEstimatedTime]);
+
   const handleDateChange = (date) => {
     setSelectedDate(date);
     // Fetch daily time spent data for the selected date
