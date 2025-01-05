@@ -141,8 +141,8 @@ const CalendarPage = () => {
     }
 
     // Play a sound notification
-    const audio = new Audio('/notification-sound.mp3'); // Updated notification sound
-    audio.play().catch(e => console.log('Audio play failed:', e));
+    const audio = new Audio('/notification-sound.mp3'); // Ensure the path is correct and accessible
+    audio.play().catch(e => console.log('Audio play failed:', e)); // Added error handling
 
     setIsTimerRunning(false);
     setIsBreak(!isBreak); // Toggle break state

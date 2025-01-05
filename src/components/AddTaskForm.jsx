@@ -48,6 +48,10 @@ const AddTaskForm = ({ onTaskAdded }) => {
         setError(dateValidation.message);
         return;
       }
+      if (startDate >= endDate) {
+        setError('End time must be after start time');
+        return;
+      }
     }
 
     try {
