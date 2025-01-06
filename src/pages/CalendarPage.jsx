@@ -334,7 +334,7 @@ const CalendarPage = () => {
               <p>
                 <strong>End:</strong> {selectedEvent.end.toLocaleString()}
               </p>
-              {!isTimerRunning && !isBreak && (
+              {!isTimerRunning && !isBreak && selectedEvent.status !== 'Completed' && (
                 <>
                   <h5>Start Focus Timer</h5>
                   <>
